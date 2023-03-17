@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/titulo"
+        android:layout_width="match_parent"
+        android:layout_height="61dp"
+        android:background=" #008080"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="AGENDA"
+        android:textAlignment="center"
+
+        android:textColor="@color/white"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:typeface="sans" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="470dp"
+        android:layout_gravity="center|center_horizontal|center_vertical"
+        app:srcCompat="@drawable/agenda"
+        android:elevation="4dp"
+
+        />
+
+    <Button
+        android:id="@+id/cadastro"
+        android:layout_width="match_parent"
+        android:layout_height="78dp"
+        android:backgroundTint="#FFA07A"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="CADASTRO"
+        android:textColor="@color/white" />
+
+</LinearLayout>
