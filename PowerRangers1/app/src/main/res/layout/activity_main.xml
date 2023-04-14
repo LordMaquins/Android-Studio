@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <LinearLayout
+        android:layout_width="409dp"
+        android:layout_height="729dp"
+        android:layout_gravity="center|center_horizontal|center_vertical"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp">
+
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="450dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center|center_horizontal|center_vertical"
+            android:text="Encontre os nomes dos personagens de: "
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="30dp"
+            app:fontFamily="monospace"
+            tools:layout_editor_absoluteX="7dp"
+            tools:layout_editor_absoluteY="152dp" />
+
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="396dp"
+            android:layout_height="268dp"
+            android:layout_gravity="center|center_horizontal|center_vertical"
+            app:srcCompat="@drawable/a" />
+
+        <EditText
+            android:id="@+id/txtEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Insira seu email"
+            android:inputType="text"
+            android:textColor="#5E5A5A"
+            android:textColorHint="#6A6666" />
+
+        <EditText
+            android:id="@+id/txtNome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Insira seu nome"
+            android:inputType="text"
+            android:textColor="#5E5B5B"
+            android:textColorHint="#575454" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="66dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/cadastrar"
+                android:layout_width="170dp"
+                android:layout_height="64dp"
+                android:layout_gravity="center|center_horizontal|center_vertical"
+                android:text="Cadastrar"
+                app:backgroundTint="#F80505"
+                tools:layout_editor_absoluteX="113dp"
+                tools:layout_editor_absoluteY="632dp" />
+
+            <LinearLayout
+                android:layout_width="62dp"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"></LinearLayout>
+
+            <Button
+                android:id="@+id/jogar"
+                android:layout_width="176dp"
+                android:layout_height="64dp"
+                android:layout_gravity="center|center_horizontal|center_vertical"
+                android:text="Jogar"
+                app:backgroundTint="#F80505"
+                tools:layout_editor_absoluteX="113dp"
+                tools:layout_editor_absoluteY="632dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
