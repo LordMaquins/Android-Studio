@@ -37,6 +37,14 @@
             app:srcCompat="@drawable/a" />
 
         <EditText
+            android:id="@+id/txtId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Id player"
+            android:inputType="text"
+            android:textColor="#5E5A5A"
+            android:textColorHint="#6A6666" />
+        <EditText
             android:id="@+id/txtEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -53,6 +61,15 @@
             android:inputType="text"
             android:textColor="#5E5B5B"
             android:textColorHint="#575454" />
+        <EditText
+            android:id="@+id/txtTel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Insira seu telefone"
+            android:inputType="text"
+            android:textColor="#5E5A5A"
+            android:textColorHint="#6A6666" />
+
 
         <LinearLayout
             android:layout_width="match_parent"
