@@ -23,6 +23,12 @@ public class Pessoa {
         this.endereco = endereco;
     }
 
+    public String getCodigo() {
+        return codigo;
+    }
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
 
     public String getNome() {
         return nome;

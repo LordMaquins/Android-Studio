@@ -6,11 +6,15 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+import java.util.List;
+
+
     public class Banco_dados extends SQLiteOpenHelper {
     public static final int VERSAO_BANCO = 1;
     public static final String BancoAgenda= "DB_age";
     public Banco_dados(Context context){
-        super(content,BancoAgenda, null, VERSAO_BANCO);
+        super(context,BancoAgenda, null, VERSAO_BANCO);
     }
     public static final String TABELA_PESSOA= "tb_pessoa";
     public static final String COLUNA_CODIGO= "codigo";
@@ -91,5 +95,37 @@ import android.database.sqlite.SQLiteOpenHelper;
             db.update(TABELA_PESSOA, valor,COLUNA_CODIGO + " =?", new String[]{String.valueOf(pessoa.getCodigo())}); // objeto db utilizando um método do SQLitedatabase para atualizar a tabela, e a classe String usando um método para atribuir o valor do objeto pessoa que está utilizando um método para recuperar os dados inseridos pelo front end.
             db.close(); // objeto db usando método para encerrar o banco de dados.
         }
+        public List<Pessoa> listaPessoa() {
+
+            List<Pessoa> pessoaLista = new ArrayList<Pessoa>();
+
+            String query = "SELECT * FROM " + TABELA_PESSOA;
+
+            SQLiteDatabase db = this.getWritableDatabase();
+
+            Cursor cursor = db.rawQuery(query, null);
+
+            if (cursor.moveToFirst()) {
+                do {
+
+                    Pessoa pessoa = new Pessoa();
+
+                    pessoa.setCodigo(Integer.parseInt(cursor.getString(0)!=null?cursor.getString( 0 ):"0"));
+                    pessoa.setNome(cursor.getString(1));
+                    pessoa.setTelefone(cursor.getString(2));
+                    pessoa.setEmail(cursor.getString(3));
+                    pessoa.setEndereco(cursor.getString(4));
+
+                    pessoaLista.add(pessoa);
+
+                } while (cursor.moveToNext());
+            }
+
+            return pessoaLista;
+
+        }
+
+    }
+
 
     }
