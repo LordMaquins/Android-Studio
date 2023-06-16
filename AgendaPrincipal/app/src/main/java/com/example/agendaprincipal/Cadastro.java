@@ -2,7 +2,6 @@ package com.example.agendaprincipal;
 
 import android.app.Service;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -10,7 +9,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,28 +16,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
-
-
-import android.os.Bundle;
-
 public class   Cadastro extends AppCompatActivity {
-        EditText cCodigo;
-        EditText cNome;
-        EditText cTelefone;
-        EditText cEmail;
-        EditText cEndereco;
-        Button btSalvar;
-        Button btExcluir;
-        Button btLimpar;
-        ListView viewPessoa;
+    EditText cCodigo;
+    EditText cNome;
+    EditText cTelefone;
+    EditText cEmail;
+    EditText cEndereco;
+    Button btSalvar;
+    Button btExcluir;
+    Button btLimpar;
+    ListView viewPessoa;
 
-        ArrayAdapter<String> adapter;
-        ArrayList<String> arrayList;
+    ArrayAdapter<String> adapter;
+    ArrayList<String> arrayList;
 
-        InputMethodManager imm;
-        Banco_dados db = new Banco_dados(this);
+    InputMethodManager imm;
+    Banco_dados db = new Banco_dados(this);
 
 
 
@@ -63,9 +55,9 @@ public class   Cadastro extends AppCompatActivity {
 
         viewPessoa.setOnItemClickListener ( new AdapterView.OnItemClickListener(){
             @Override
-                    public void onItemClick (AdapterView<?> adapterView, View view, int position, long id) {
+            public void onItemClick (AdapterView<?> adapterView, View view, int position, long id) {
                 String conteudo = (String)
-                viewPessoa.getItemAtPosition (position);
+                        viewPessoa.getItemAtPosition (position);
 
                 String codigo = conteudo.substring(0, conteudo.indexOf("-"));
 
@@ -80,77 +72,78 @@ public class   Cadastro extends AppCompatActivity {
 
 
         });
-        btLimpar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+
+    btLimpar.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            limpaCampos();
+        }
+    });
+
+    btSalvar.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+
+            String codigo = cCodigo.getText().toString();
+            String nome = cNome.getText().toString();
+            String telefone = cTelefone.getText().toString();
+            String email = cEmail.getText().toString();
+            String endereco =  cEndereco.getText().toString();
+
+            if (nome.isEmpty()){
+                cNome.setError("Este campo é obrigatório");
+            } else if (codigo.isEmpty()){
+
+                db.addPessoa(new Pessoa(nome, telefone, email, endereco));
+
+                Toast.makeText(Cadastro.this, "Cadastro salvo com sucesso", Toast.LENGTH_SHORT).show();
+
+                    listarPessoas();
+                    limpaCampos();
+                    escondeTeclado();
+            } else{
+                db.atualizarPessoa( new Pessoa ());
+                Toast.makeText(Cadastro.this, "Cadastro atualizado com sucesso", Toast.LENGTH_SHORT).show();
+                listarPessoas();
                 limpaCampos();
+                escondeTeclado();
             }
-            });
+        }
+    });
 
-        btSalvar.setOnClickListener (new View.OnClickListener() {
-            @Override
-            public void onClick (View view) {
-                String codigo = cCodigo.getText ().toString();
-                String nome= cNome.getText ().toString();
-                String telefone= cTelefone.getText().toString();
-                String email= cEmail.getText().toString();
-                String endereco= cEndereco.getText().toString() ;
+    btExcluir.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            String codigo = cCodigo.getText().toString();
+            if (codigo.isEmpty()){
+                Toast.makeText(Cadastro.this, "Nenhuma pessoa" +
+                        " está selecionada", Toast.LENGTH_SHORT).show();
 
-                if (nome.isEmpty()){
-                    cNome.setError("Este campo é obrigatório");
-                } else if (codigo.isEmpty()){
-                    db.addPessoa(new Pessoa(nome, telefone, email, endereco));
-                    Toast.makeText(Cadastro.this, "Cadastro salvo com sucesso", Toast.LENGTH_SHORT).show();
-                    listarPessoas();
-                    limpaCampos();
-                    escondeTeclado();
+            }else{
 
-                } else {
-                    db.atualizarPessoa( new Pessoa (Integer.parseInt(codigo), nome, telefone, email, endereco));
-                    Toast.makeText(Cadastro.this, "Cadastro atualizado com sucesso", Toast.LENGTH_SHORT).show();
-                    listarPessoas();
-                    limpaCampos();
-                    escondeTeclado();
-
-                }
-            }
-        });
-        btExcluir.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                String codigo = cCodigo.getText().toString();
-                if (codigo.isEmpty()) {
-                    Toast.makeText(Cadastro.this, "Nenhuma pessoa está selecionada", Toast.LENGTH_SHORT).show();
-                } else {
-
-                    Pessoa pessoa = new Pessoa();
-                    pessoa.setCodigo(Integer.parseInt(codigo));
-                    db.apagarPessoa(pessoa);
-                    Toast.makeText(Cadastro.this, "Registro da pessoa apagada com sucesso", Toast.LENGTH_SHORT).show();
-                    cCodigo.setText("");
-                    listarPessoas();
-                    limpaCampos();
-                }
+                Pessoa pessoa = new Pessoa();
+                pessoa.setCodigo(Integer.parseInt(codigo));
+                db.apagarPessoa(pessoa);
+                Toast.makeText(Cadastro.this, "Registro da pessoa apagada " +
+                        "com sucesso", Toast.LENGTH_SHORT).show();
+                cCodigo.setText("");
+                listarPessoas();
+                limpaCampos();
 
             }
-        });
-
+        }
+    });
     }
     void escondeTeclado(){
-        imm.hideSoftInputFromWindow( cNome.getWindowToken(),0 );
+        imm.hideSoftInputFromWindow( cNome.getWindowToken(),0);
     }
-
     public void limpaCampos() {
         cCodigo.setText("");
         cNome.setText("");
         cTelefone.setText("");
         cEmail.setText("");
         cEndereco.setText("");
-
-        cNome.requestFocus();
     }
-
 
     public void listarPessoas(){
 
@@ -168,14 +161,5 @@ public class   Cadastro extends AppCompatActivity {
             arrayList.add(c.getCodigo() + "-" + c.getNome());
             adapter.notifyDataSetChanged();
         }
-
-    }
-
-}
-
-
-
-
-
     }
 }

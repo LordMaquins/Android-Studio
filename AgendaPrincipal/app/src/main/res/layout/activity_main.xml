@@ -14,7 +14,7 @@
         android:layout_height="61dp"
         android:background=" #008080"
         android:fontFamily="@font/montserrat_bold"
-        android:text="AGENDA"
+        android:text="POWER GENDA"
         android:textAlignment="center"
 
         android:textColor="@color/white"
@@ -27,7 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="470dp"
         android:layout_gravity="center|center_horizontal|center_vertical"
-        app:srcCompat="@drawable/agenda"
+        app:srcCompat="@drawable/a"
         android:elevation="4dp"
 
         />
