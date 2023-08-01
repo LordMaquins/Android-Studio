@@ -25,16 +25,15 @@ public class Banco_dados extends SQLiteOpenHelper {
     public static final String COLUNA_EMAIL= "email";
     public static final String COLUNA_TELEFONE= "telefone";
     public static final String COLUNA_ENDERECO= "endereço";
+    public static final String COLUNA_COR= "cor";
 
     @Override
-        public void onCreate(SQLiteDatabase db) { //Para criar a tabela
+    public void onCreate(SQLiteDatabase db) {
+        String CRIAR_TABELA = "CREATE TABLE " + TABELA_PESSOA + "(" + COLUNA_IDPESSOA + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + COLUNA_NOME + " TEXT, " + COLUNA_EMAIL + " TEXT, " + COLUNA_TELEFONE + " TEXT, " + COLUNA_ENDERECO + " TEXT," +COLUNA_COR + "TEXT)";
+        // Adicione espaços após os nomes das colunas e antes dos tipos de dados
 
-        String CRIAR_TABELA = " CREATE TABLE " + TABELA_PESSOA + "(" + COLUNA_IDPESSOA + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-        + COLUNA_NOME + "TEXT," + COLUNA_EMAIL + "TEXT," + COLUNA_TELEFONE + "TEXT," + COLUNA_ENDERECO + "TEXT)";
-        // Foi usado o codigo para o MYSQL
-
-        db.execSQL(CRIAR_TABELA); // usando um metodo para criando a tabela
-
+        db.execSQL(CRIAR_TABELA);
     }
 
     @Override
@@ -74,7 +73,7 @@ public class Banco_dados extends SQLiteOpenHelper {
      Pessoa selecionarPessoa(int codigo) { // Criando metodo selecionar pessoa
 
         SQLiteDatabase db =this.getReadableDatabase();
-        Cursor cursor = db.query(TABELA_PESSOA, new String[]{COLUNA_IDPESSOA, COLUNA_NOME, COLUNA_EMAIL, COLUNA_TELEFONE, COLUNA_ENDERECO},
+        Cursor cursor = db.query(TABELA_PESSOA, new String[]{COLUNA_IDPESSOA, COLUNA_NOME, COLUNA_EMAIL, COLUNA_TELEFONE, COLUNA_ENDERECO, COLUNA_COR},
                 // instanciamos o cursor em uma variavel de mesmo nome, usamo um metodo dentro do objeto db que faz uma busca no banco de dados onde ele vai precisar apenas do id da pessoa para mostrar os outros valores
                 COLUNA_IDPESSOA + " ?=", new String[]{String.valueOf(codigo)}, null, null, null, null);
 
@@ -101,6 +100,7 @@ public class Banco_dados extends SQLiteOpenHelper {
          valor.put(COLUNA_EMAIL, pessoa.getEmail());
          valor.put(COLUNA_TELEFONE, pessoa.getTelefone());
          valor.put(COLUNA_ENDERECO, pessoa.getEndereco());
+         valor.put(COLUNA_COR, pessoa.getCor());
 
          db.update(TABELA_PESSOA, valor, COLUNA_IDPESSOA + " =?", new String[]{String.valueOf(pessoa.getCodigo())}); // objeto db usando um método do SQLitedatabase para atualizar a tabela
          db.close();
@@ -122,13 +122,12 @@ public class Banco_dados extends SQLiteOpenHelper {
 
                 Pessoa pessoa = new Pessoa();
 
-
-
                 pessoa.setCodigo(Integer.parseInt(cursor.getString(0)!=null?cursor.getString( 0 ):"0"));
                 pessoa.setNome(cursor.getString(1));
                 pessoa.setTelefone(cursor.getString(2));
                 pessoa.setEmail(cursor.getString(3));
                 pessoa.setEndereco(cursor.getString(4));
+                pessoa.setCor(cursor.getString(5));
 
                 pessoaLista.add(pessoa);
 

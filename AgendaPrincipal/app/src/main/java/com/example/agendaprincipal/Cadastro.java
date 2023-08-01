@@ -22,6 +22,7 @@ public class   Cadastro extends AppCompatActivity {
     EditText cTelefone;
     EditText cEmail;
     EditText cEndereco;
+    EditText cCor;
     Button btSalvar;
     Button btExcluir;
     Button btLimpar;
@@ -46,10 +47,14 @@ public class   Cadastro extends AppCompatActivity {
         cTelefone = findViewById(R.id.edt_celular);
         cEmail = findViewById(R.id.edt_email);
         cEndereco = findViewById(R.id.edt_endereco);
+        cCor = findViewById(R.id.edt_cor);
         btSalvar = findViewById(R.id.btnSalvar);
         btExcluir = findViewById(R.id.btnExcluir);
         btLimpar = findViewById(R.id.btnLimpar);
         viewPessoa = findViewById(R.id.listViewPessoa);
+
+
+        db = new Banco_dados(this);
 
         cNome.requestFocus();
 
@@ -67,6 +72,7 @@ public class   Cadastro extends AppCompatActivity {
                 cTelefone.setText(pessoa.getTelefone());
                 cEmail.setText(pessoa.getEmail());
                 cEndereco.setText(pessoa.getEndereco());
+                cCor.setText(pessoa.getCor());
 
             }
 
@@ -89,25 +95,35 @@ public class   Cadastro extends AppCompatActivity {
             String telefone = cTelefone.getText().toString();
             String email = cEmail.getText().toString();
             String endereco =  cEndereco.getText().toString();
+            String cor =  cCor.getText().toString();
 
-            if (nome.isEmpty()){
+            // Dentro do método onClick do botão salvar
+
+            if (nome.isEmpty()) {
                 cNome.setError("Este campo é obrigatório");
-            } else if (codigo.isEmpty()){
+            } else if (codigo.isEmpty()) {
+                // Se o código estiver vazio, significa que é uma nova pessoa a ser inserida
 
-                db.addPessoa(new Pessoa(nome, telefone, email, endereco));
-
+                db.addPessoa(new Pessoa(nome, telefone, email, endereco, cor));
                 Toast.makeText(Cadastro.this, "Cadastro salvo com sucesso", Toast.LENGTH_SHORT).show();
+                listarPessoas();
+                limpaCampos();
+                escondeTeclado();
+            } else {
+                // Caso contrário, significa que é uma pessoa existente a ser atualizada
 
-                    listarPessoas();
-                    limpaCampos();
-                    escondeTeclado();
-            } else{
-                db.atualizarPessoa( new Pessoa ());
+                int idPessoa = Integer.parseInt(codigo); // Converter o código para um inteiro
+
+                // Criar uma instância de Pessoa com os valores atualizados
+                Pessoa pessoaAtualizada = new Pessoa(idPessoa, nome, telefone, email, endereco, cor);
+
+                db.atualizarPessoa(pessoaAtualizada); // Atualizar a pessoa no banco de dados
                 Toast.makeText(Cadastro.this, "Cadastro atualizado com sucesso", Toast.LENGTH_SHORT).show();
                 listarPessoas();
                 limpaCampos();
                 escondeTeclado();
             }
+
         }
     });
 
@@ -143,6 +159,7 @@ public class   Cadastro extends AppCompatActivity {
         cTelefone.setText("");
         cEmail.setText("");
         cEndereco.setText("");
+        cCor.setText("");
     }
 
     public void listarPessoas(){

@@ -7,21 +7,20 @@ public class Pessoa {
     private String telefone;
     private String email;
     private String endereco;
+    private String cor;
 
+    public Pessoa(String nome, String telefone, String email, String endereco, String cor) {
+        this.nome = nome;
+        this.telefone = telefone;
+        this.email = email;
+        this.endereco = endereco;
+        this.cor= cor;
+    }
 
     public Pessoa() {
-        this.codigo = codigo;
-        this.nome = nome;
-        this.telefone = telefone;
-        this.email = email;
-        this.endereco = endereco;
+        // Construtor vazio
     }
-    public Pessoa(String nome, String telefone, String email, String endereco) {
-        this.nome = nome;
-        this.telefone = telefone;
-        this.email = email;
-        this.endereco = endereco;
-    }
+
 
 
     public int getCodigo() {
@@ -58,6 +57,13 @@ public class Pessoa {
     }
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public String getCor() {
+        return cor;
+    }
+    public void setCor(String cor) {
+        this.cor = cor;
     }
 
 
