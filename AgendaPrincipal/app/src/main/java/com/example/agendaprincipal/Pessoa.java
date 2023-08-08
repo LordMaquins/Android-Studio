@@ -21,6 +21,8 @@ public class Pessoa {
         // Construtor vazio
     }
 
+    public Pessoa(int idPessoa, String nome, String telefone, String email, String endereco, String cor) {
+    }
 
 
     public int getCodigo() {
