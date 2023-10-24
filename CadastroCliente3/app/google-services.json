@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "818095827967",
+    "firebase_url": "https://cadastrocliente2-ab6b1-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "cadastrocliente2-ab6b1",
+    "storage_bucket": "cadastrocliente2-ab6b1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:818095827967:android:fcb711c77daa46cee1d5ca",
+        "android_client_info": {
+          "package_name": "com.example.cadastrocliente"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYC2oobnEz66Yxpux4nkwKLKIWH94qgrI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:818095827967:android:1af3e3b6a56a6275e1d5ca",
+        "android_client_info": {
+          "package_name": "com.example.cadastrocliente2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYC2oobnEz66Yxpux4nkwKLKIWH94qgrI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
